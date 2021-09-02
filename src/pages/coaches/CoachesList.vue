@@ -8,7 +8,7 @@
                 <div class="controls">
                     <base-button mode="outline">Refresh</base-button>
                     <base-button link to="/register"
-                        >Register as Coach</base-button
+                         v-if="!isCoach">Register as Coach</base-button
                     >
                 </div>
                 <ul v-if="hasCoaches">
@@ -47,6 +47,9 @@ export default {
         };
     },
     computed: {
+        isCoach() {
+            return this.$store.getters['coaches/isCoach'];
+        },
         filteredCoaches() {
             const coaches = this.$store.getters['coaches/coaches'];
             return coaches.filter(coach => {
